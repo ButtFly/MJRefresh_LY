@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'MJRefresh_LY_Example' do
+  pod 'MJRefresh_LY', :path => '../'
+
+  target 'MJRefresh_LY_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
