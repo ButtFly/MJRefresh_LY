@@ -30,9 +30,9 @@
 /* Begin PBXFileReference section */
 		30E55AEB4B6AEF39368908ED /* Pods-MJRefresh_LY_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MJRefresh_LY_Example.debug.xcconfig"; path = "Target Support Files/Pods-MJRefresh_LY_Example/Pods-MJRefresh_LY_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		3ABE2781117B498C6CAC1372 /* Pods-MJRefresh_LY_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MJRefresh_LY_Example.release.xcconfig"; path = "Target Support Files/Pods-MJRefresh_LY_Example/Pods-MJRefresh_LY_Example.release.xcconfig"; sourceTree = "<group>"; };
-		3F204E4658A853E1AB5A62F0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		3F204E4658A853E1AB5A62F0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4DA29E017B810E85C5E15207 /* Pods_MJRefresh_LY_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MJRefresh_LY_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		509AC4649B16EE2D71DAD1EF /* MJRefresh_LY.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = MJRefresh_LY.podspec; path = ../MJRefresh_LY.podspec; sourceTree = "<group>"; };
+		509AC4649B16EE2D71DAD1EF /* MJRefresh_LY.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MJRefresh_LY.podspec; path = ../MJRefresh_LY.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		607FACD01AFB9204008FA782 /* MJRefresh_LY_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MJRefresh_LY_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,7 +43,7 @@
 		607FACE51AFB9204008FA782 /* MJRefresh_LY_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MJRefresh_LY_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		613D65F11F336538E78BA874 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		613D65F11F336538E78BA874 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		87B37D561CA14243CEE4E0CC /* Pods-MJRefresh_LY_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MJRefresh_LY_Tests.debug.xcconfig"; path = "Target Support Files/Pods-MJRefresh_LY_Tests/Pods-MJRefresh_LY_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		C39AFB7C6617786DF518143C /* Pods-MJRefresh_LY_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MJRefresh_LY_Tests.release.xcconfig"; path = "Target Support Files/Pods-MJRefresh_LY_Tests/Pods-MJRefresh_LY_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D24B3F7B5B99FDFCD5C30DDA /* Pods_MJRefresh_LY_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MJRefresh_LY_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,7 +156,6 @@
 				87B37D561CA14243CEE4E0CC /* Pods-MJRefresh_LY_Tests.debug.xcconfig */,
 				C39AFB7C6617786DF518143C /* Pods-MJRefresh_LY_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -227,6 +226,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -313,10 +313,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MJRefresh_LY_Example/Pods-MJRefresh_LY_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh_LY/MJRefresh_LY.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh_LY.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

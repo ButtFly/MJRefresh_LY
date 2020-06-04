@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'MJRefresh_LY'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of MJRefresh_LY.'
+  s.summary          = '自用MJRefresh的封装，实现上拉下拉'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -32,11 +32,5 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'MJRefresh_LY/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'MJRefresh_LY' => ['MJRefresh_LY/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'MJRefresh'
 end

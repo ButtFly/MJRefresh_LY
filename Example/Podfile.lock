@@ -1,0 +1,23 @@
+PODS:
+  - MJRefresh (3.3.1)
+  - MJRefresh_LY (0.1.0):
+    - MJRefresh
+
+DEPENDENCIES:
+  - MJRefresh_LY (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - MJRefresh
+
+EXTERNAL SOURCES:
+  MJRefresh_LY:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
+  MJRefresh_LY: 6709f395ba5cfae572102c2458e4fb68eeb631af
+
+PODFILE CHECKSUM: 763123119ad36d77f1587bd537dc420035dd1a70
+
+COCOAPODS: 1.9.0.beta.2
