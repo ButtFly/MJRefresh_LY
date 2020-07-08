@@ -9,29 +9,30 @@ import UIKit
 import MJRefresh
 
 public enum MJRefreshLY {
+    
+    /// 最短显示时间，防止加载过快的时候，动画一闪而过
+    public static var minShowTime: Double = 0.5
+    
     public static func addRefreshHeaderFor<T: MJRefreshLYProtocol>(aObj: T) -> Void {
         weak var weakObj = aObj
         aObj.contentTable.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
             guard let weakObj = weakObj else {
                 return
             }
-            
-            weakObj.lyLoadDatasWithPage(0) { (datas, totalPage) in
-                weakObj.contentTable.mj_header?.endRefreshing()
-                guard let datas = datas else {
-                    weakObj.contentTable.mj_footer?.endRefreshing()
-                    return
-                }
-                weakObj.datas = datas
-                let loadedPage = Int(ceil(Double(weakObj.datas.count) / Double(weakObj.pageSize)))
-
-                if let totalPage = totalPage, totalPage > loadedPage {
-                    weakObj.contentTable.mj_footer?.resetNoMoreData()
-                    weakObj.contentTable.mj_footer?.endRefreshing()
+            let start = Date.timeIntervalSinceReferenceDate
+            weakObj.lyLoadDatasWithPage(0, pageSize: weakObj.pageSize) { (datas, totalPage) in
+                let end = Date.timeIntervalSinceReferenceDate
+                let min = minShowTime > 0 ? minShowTime : 0
+                let d = end - start
+                if d < min {
+                    DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + min - d) {
+                        DispatchQueue.main.async {
+                            endRefresh(weakObj: weakObj, datas: datas, totalPage: totalPage)
+                        }
+                    }
                 } else {
-                    weakObj.contentTable.mj_footer?.endRefreshingWithNoMoreData()
+                    endRefresh(weakObj: weakObj, datas: datas, totalPage: totalPage)
                 }
-                weakObj.contentTable.reloadData()
             }
         })
     }
@@ -41,26 +42,69 @@ public enum MJRefreshLY {
             guard let weakObj = weakObj else {
                 return
             }
-            var loadedPage = Int(ceil(Double(weakObj.datas.count) / Double(weakObj.pageSize)))
-            weakObj.lyLoadDatasWithPage(loadedPage) { (datas, totalPage) in
-                weakObj.contentTable.mj_header?.endRefreshing()
-                guard let datas = datas else {
-                    weakObj.contentTable.mj_footer?.endRefreshing()
-                    return
-                }
-                weakObj.datas.append(contentsOf: datas)
-                loadedPage = Int(ceil(Double(weakObj.datas.count) / Double(weakObj.pageSize)))
-
-                if let totalPage = totalPage, totalPage > loadedPage {
-                    weakObj.contentTable.mj_footer?.resetNoMoreData()
-                    weakObj.contentTable.mj_footer?.endRefreshing()
+            let start = Date.timeIntervalSinceReferenceDate
+            let loadedPage = Int(ceil(Double(weakObj.datas?.count ?? 0) / Double(weakObj.pageSize)))
+            weakObj.lyLoadDatasWithPage(loadedPage, pageSize: weakObj.pageSize) { (datas, totalPage) in
+                let end = Date.timeIntervalSinceReferenceDate
+                let min = minShowTime > 0 ? minShowTime : 0
+                let d = end - start
+                if d < min {
+                    DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + min - d) {
+                        DispatchQueue.main.async {
+                            endLoadMore(weakObj: weakObj, datas: datas, totalPage: totalPage)
+                        }
+                    }
                 } else {
-                    weakObj.contentTable.mj_footer?.endRefreshingWithNoMoreData()
+                    endLoadMore(weakObj: weakObj, datas: datas, totalPage: totalPage)
                 }
-                weakObj.contentTable.reloadData()
             }
         })
+        aObj.contentTable.mj_footer?.isHidden = (aObj.datas?.count ?? 0) == 0
     }
+    
+    fileprivate static func endRefresh<T: MJRefreshLYProtocol>(weakObj: T, datas: [T.T]?, totalPage: Int?) -> Void {
+        
+        weakObj.contentTable.mj_header?.endRefreshing()
+        guard let datas = datas else {
+            weakObj.contentTable.mj_footer?.endRefreshing()
+            return
+        }
+        weakObj.datas = datas
+        let loadedPage = Int(ceil(Double(weakObj.datas?.count ?? 0) / Double(weakObj.pageSize)))
+        
+        if (totalPage == nil) || (totalPage! > loadedPage) {
+            weakObj.contentTable.mj_footer?.resetNoMoreData()
+            weakObj.contentTable.mj_footer?.endRefreshing()
+        } else {
+            weakObj.contentTable.mj_footer?.endRefreshingWithNoMoreData()
+        }
+        weakObj.contentTable.mj_footer?.isHidden = (weakObj.datas?.count ?? 0) == 0
+        weakObj.contentTable.reloadData()
+        
+    }
+    
+    fileprivate static func endLoadMore<T: MJRefreshLYProtocol>(weakObj: T, datas: [T.T]?, totalPage: Int?) -> Void {
+        weakObj.contentTable.mj_header?.endRefreshing()
+        guard let datas = datas else {
+            weakObj.contentTable.mj_footer?.endRefreshing()
+            return
+        }
+        if weakObj.datas == nil {
+            weakObj.datas = [T.T]()
+        }
+        weakObj.datas!.append(contentsOf: datas)
+        let loadedPage = Int(ceil(Double(weakObj.datas!.count) / Double(weakObj.pageSize)))
+        
+        if (totalPage == nil) || (totalPage! > loadedPage) {
+            weakObj.contentTable.mj_footer?.resetNoMoreData()
+            weakObj.contentTable.mj_footer?.endRefreshing()
+        } else {
+            weakObj.contentTable.mj_footer?.endRefreshingWithNoMoreData()
+        }
+        weakObj.contentTable.mj_footer?.isHidden = (weakObj.datas?.count ?? 0) == 0
+        weakObj.contentTable.reloadData()
+    }
+    
 }
 
 public protocol MJRefreshLYProtocol: NSObject {
@@ -68,9 +112,11 @@ public protocol MJRefreshLYProtocol: NSObject {
     associatedtype T
     
     var contentTable: UITableView { get }
-    var datas: [T] { get set }
+    var datas: [T]? { get set }
     var pageSize: Int { get }
     
-    func lyLoadDatasWithPage(_ page: Int, complete: @escaping (_ datas: [T]?, _ allPage: Int?) -> Void) -> Void
+    func lyLoadDatasWithPage(_ page: Int, pageSize: Int, complete: @escaping (_ datas: [T]?, _ allPage: Int?) -> Void) -> Void
     
 }
+
+

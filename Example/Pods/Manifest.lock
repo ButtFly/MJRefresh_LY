@@ -1,5 +1,5 @@
 PODS:
-  - MJRefresh (3.3.1)
+  - MJRefresh (3.4.3)
   - MJRefresh_LY (0.1.0):
     - MJRefresh
 
@@ -15,9 +15,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
-  MJRefresh_LY: 6709f395ba5cfae572102c2458e4fb68eeb631af
+  MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
+  MJRefresh_LY: 4078efedfa8b786a804b189a75be551a915841a2
 
 PODFILE CHECKSUM: 763123119ad36d77f1587bd537dc420035dd1a70
 
-COCOAPODS: 1.9.0.beta.2
+COCOAPODS: 1.9.3

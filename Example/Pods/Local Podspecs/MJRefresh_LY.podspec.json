@@ -16,12 +16,14 @@
     "tag": "0.1.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "10.0"
   },
+  "swift_versions": "5.0",
   "source_files": "MJRefresh_LY/Classes/**/*",
   "dependencies": {
     "MJRefresh": [
 
     ]
-  }
+  },
+  "swift_version": "5.0"
 }
