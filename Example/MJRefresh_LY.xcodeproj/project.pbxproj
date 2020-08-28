@@ -212,11 +212,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = K64377832H;
+						DevelopmentTeam = 43X6Z88D7P;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 43X6Z88D7P;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -481,7 +482,7 @@
 			baseConfigurationReference = 30E55AEB4B6AEF39368908ED /* Pods-MJRefresh_LY_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = K64377832H;
+				DEVELOPMENT_TEAM = 43X6Z88D7P;
 				INFOPLIST_FILE = MJRefresh_LY/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -498,7 +499,7 @@
 			baseConfigurationReference = 3ABE2781117B498C6CAC1372 /* Pods-MJRefresh_LY_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = K64377832H;
+				DEVELOPMENT_TEAM = 43X6Z88D7P;
 				INFOPLIST_FILE = MJRefresh_LY/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -514,6 +515,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 87B37D561CA14243CEE4E0CC /* Pods-MJRefresh_LY_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 43X6Z88D7P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -536,6 +538,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C39AFB7C6617786DF518143C /* Pods-MJRefresh_LY_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 43X6Z88D7P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",

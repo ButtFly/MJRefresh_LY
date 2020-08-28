@@ -10,12 +10,16 @@ import MJRefresh
 
 public enum MJRefreshLY {
     
-    /// 最短显示时间，防止加载过快的时候，动画一闪而过
-    public static var minShowTime: Double = 0.5
-    
-    public static func addRefreshHeaderFor<T: MJRefreshLYProtocol>(aObj: T) -> Void {
+    /// <#Description#>
+    /// - Parameters:
+    ///   - aObj: <#aObj description#>
+    ///   - aHeader: 可以自定义header
+    ///   - minShowTime: 最小的显示时间，放置动画一闪而过
+    /// - Returns: <#description#>
+    public static func addRefreshHeaderFor<T: MJRefreshLYProtocol>(aObj: T, aHeader: MJRefreshHeader? = nil, minShowTime: Double = 0.5) -> Void {
+        let header = aHeader ?? MJRefreshNormalHeader()
         weak var weakObj = aObj
-        aObj.contentTable.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+        header.refreshingBlock = {
             guard let weakObj = weakObj else {
                 return
             }
@@ -34,11 +38,13 @@ public enum MJRefreshLY {
                     endRefresh(weakObj: weakObj, datas: datas, totalPage: totalPage)
                 }
             }
-        })
+        }
+        aObj.contentTable.mj_header = header
     }
-    public static func addRefreshFooterFor<T: MJRefreshLYProtocol>(aObj: T) -> Void {
+    public static func addRefreshFooterFor<T: MJRefreshLYProtocol>(aObj: T, aFooter: MJRefreshFooter? = nil, minShowTime: Double = 0.5) -> Void {
+        let footer = aFooter ?? MJRefreshAutoNormalFooter()
         weak var weakObj = aObj
-        aObj.contentTable.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+        footer.refreshingBlock = {
             guard let weakObj = weakObj else {
                 return
             }
@@ -58,7 +64,8 @@ public enum MJRefreshLY {
                     endLoadMore(weakObj: weakObj, datas: datas, totalPage: totalPage)
                 }
             }
-        })
+        }
+        aObj.contentTable.mj_footer = footer
         aObj.contentTable.mj_footer?.isHidden = (aObj.datas?.count ?? 0) == 0
     }
     
