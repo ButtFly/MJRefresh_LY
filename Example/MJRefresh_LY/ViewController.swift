@@ -44,6 +44,14 @@ class ViewController: UIViewController, MJRefreshLYProtocol {
             complete(["时间段\(page)"], 10)
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        print("viewDidDisappear")
+    }
 }
 
 

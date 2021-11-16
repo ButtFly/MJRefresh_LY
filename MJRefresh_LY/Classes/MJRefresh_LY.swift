@@ -66,7 +66,8 @@ public enum MJRefreshLY {
             }
         }
         aObj.contentTable.mj_footer = footer
-        aObj.contentTable.mj_footer?.isHidden = (aObj.datas?.count ?? 0) == 0
+        aObj.contentTable.mj_footer?.isHidden = (aObj.datas?.count ?? 0) == 0 || aObj.contentTable.contentSize.height < aObj.contentTable.bounds.size.height
+
     }
     
     fileprivate static func endRefresh<T: MJRefreshLYProtocol>(weakObj: T, datas: [T.T]?, totalPage: Int?) -> Void {
@@ -85,8 +86,8 @@ public enum MJRefreshLY {
         } else {
             weakObj.contentTable.mj_footer?.endRefreshingWithNoMoreData()
         }
-        weakObj.contentTable.mj_footer?.isHidden = (weakObj.datas?.count ?? 0) == 0
         weakObj.contentTable.reloadData()
+        weakObj.contentTable.mj_footer?.isHidden = (weakObj.datas?.count ?? 0) == 0 || weakObj.contentTable.contentSize.height < weakObj.contentTable.bounds.size.height
         
     }
     
@@ -108,8 +109,8 @@ public enum MJRefreshLY {
         } else {
             weakObj.contentTable.mj_footer?.endRefreshingWithNoMoreData()
         }
-        weakObj.contentTable.mj_footer?.isHidden = (weakObj.datas?.count ?? 0) == 0
         weakObj.contentTable.reloadData()
+        weakObj.contentTable.mj_footer?.isHidden = (weakObj.datas?.count ?? 0) == 0 || weakObj.contentTable.contentSize.height < weakObj.contentTable.bounds.size.height
     }
     
 }
