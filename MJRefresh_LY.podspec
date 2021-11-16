@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MJRefresh_LY'
-  s.version          = '1.0.1'
+  s.version          = '1.1.0'
   s.summary          = 'MJRefresh的封装，将常用的功能以协议的方式封装。通过遵循相关的协议，可以实现快速添加上拉下拉功能，不用再重复去处理逻辑。'
 
 # This description is used to generate tags and improve search results.
@@ -29,8 +29,7 @@ TODO: Add long description of the pod here.
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
-  s.swift_version = '5.0'
-
+  
   s.source_files = 'MJRefresh_LY/Classes/**/*'
   
   s.dependency 'MJRefresh'
