@@ -42,7 +42,7 @@ public enum MJRefreshLY {
         aObj.contentTable.mj_header = header
     }
     public static func addRefreshFooterFor<T: MJRefreshLYProtocol>(aObj: T, aFooter: MJRefreshFooter? = nil, minShowTime: Double = 0.5) -> Void {
-        let footer = aFooter ?? MJRefreshAutoNormalFooter()
+        let footer = aFooter ?? MJRefreshAutoNormalFooter().stateLabel.font
         weak var weakObj = aObj
         footer.refreshingBlock = {
             guard let weakObj = weakObj else {
